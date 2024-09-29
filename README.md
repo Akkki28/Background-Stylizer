@@ -1,3 +1,4 @@
+![Deployed Link](https://background-stylizer.streamlit.app/)
 # Background-Stylizer
 Built a model that stylizes the background of an image cropping out the person in it using Neural Style transfer and semantic segmentaion techniques
 given two images,one content,one style, the model outputs the following
