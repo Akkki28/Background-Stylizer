@@ -13,6 +13,11 @@ Neural style transfer (NST) refers to a class of software algorithms that manipu
 
 In digital image processing and computer vision, image segmentation is the process of partitioning a digital image into multiple image segments, also known as image regions or image objects.YOLO for object segmentation is employed to identify and isolate image regions for style transfer.
 
+# Sample Output
+![stylized_image (1)](https://github.com/user-attachments/assets/2541c028-69fd-427c-8000-4ecef37ff2ac)
+![stylized_image (2)](https://github.com/user-attachments/assets/063e6424-6d48-48f4-b168-f8615623353e)
+![stylized_image (3)](https://github.com/user-attachments/assets/0fa05426-8147-4b69-9d84-062525acee30)
+
 # How to run
 ## Prerequisites
 Ensure you have the following installed on your system:
