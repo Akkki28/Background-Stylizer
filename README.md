@@ -16,7 +16,8 @@ In digital image processing and computer vision, image segmentation is the proce
 # Sample Output
 ![stylized_image (1)](https://github.com/user-attachments/assets/2541c028-69fd-427c-8000-4ecef37ff2ac)
 ![stylized_image (2)](https://github.com/user-attachments/assets/063e6424-6d48-48f4-b168-f8615623353e)
-![stylized_image (3)](https://github.com/user-attachments/assets/0fa05426-8147-4b69-9d84-062525acee30)
+![stylized_image (4)](https://github.com/user-attachments/assets/41bd7d66-8532-491c-bcf3-06de13d232a6)
+
 
 # How to run
 ## Prerequisites
