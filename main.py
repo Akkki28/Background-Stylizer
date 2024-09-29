@@ -3,34 +3,37 @@ import os
 import numpy as np
 import tensorflow as tf
 import tensorflow_hub as hub
-from functions import crop_center,load_and_preprocess_image,save_image
+from functions import crop_center, load_and_preprocess_image, save_image
 from PIL import Image
 from ultralytics import YOLO
+import io
 import cv2
-
 
 hub_handle = 'https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2'
 hub_module = hub.load(hub_handle)
 
-st.title("Background Stylizer")
-
+st.markdown("<h1 style='text-align: center;'>Background Stylizer</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #1E90FF;'>Edit the Styles of the Background of Your Images</h3>", unsafe_allow_html=True)
 with st.form(key='image_upload_form'):
-    contentimg = st.file_uploader("Upload content image", type=["jpg", "jpeg", "png"], key='image1', help="An image of you to stylize")
-    styleimg = st.file_uploader("Upload Style image", type=["jpg", "jpeg", "png"], key='image2', help="Image use to stylize your background")
+    st.markdown("<h2 style='font-weight:bold;'>Upload Content Image</h2>", unsafe_allow_html=True)
+    contentimg = st.file_uploader("", type=["jpg", "jpeg", "png"], key='image1', help="An image of you to stylize")
+    
+    st.markdown("<h2 style='font-weight:bold;'>Upload Style Image</h2>", unsafe_allow_html=True)
+    styleimg = st.file_uploader("", type=["jpg", "jpeg", "png"], key='image2', help="Image used to stylize your background")
 
     submit_button = st.form_submit_button(label='Submit')
 
 if submit_button:
     if contentimg is not None and styleimg is not None:
-        content=Image.open(contentimg)
-        style=Image.open(styleimg)
-        content_img=load_and_preprocess_image(image=content)
-        style_img=load_and_preprocess_image(image=style)
+        content = Image.open(contentimg)
+        style = Image.open(styleimg)
+        content_img = load_and_preprocess_image(image=content)
+        style_img = load_and_preprocess_image(image=style)
         outputs = hub_module(content_img, style_img)
         stylized_image = outputs[0]
         save_image(stylized_image, 'stylized_image.jpg')
         background = Image.open('stylized_image.jpg').convert('RGBA')
-        resized_image = content.resize((256,256))
+        resized_image = content.resize((256, 256))
         model = YOLO("yolov8m-seg.pt")
         results = model.predict(resized_image)
         result = results[0]
@@ -50,5 +53,16 @@ if submit_button:
             raise ValueError("The images must have the same dimensions")
         combined = Image.alpha_composite(background, overlay_image)
         st.image(combined, caption='Combined Image')
+
+        img_byte_arr = io.BytesIO()
+        combined.save(img_byte_arr, format='PNG')
+        img_byte_arr.seek(0)
+
+        st.download_button(
+            label="Download Stylized Image",
+            data=img_byte_arr,
+            file_name="stylized_image.jpg",
+            mime="image/jpeg"
+        )
     else:
         st.error("Please upload both images")

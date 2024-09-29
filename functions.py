@@ -18,8 +18,8 @@ def load_and_preprocess_image(image, image_size=(256, 256), preserve_aspect_rati
     if isinstance(image, np.ndarray):
         img = image.astype(np.float32) / 255.0
     else: 
-        img = np.array(image).astype(np.float32) / 255.0
-    img = img[np.newaxis, ...]
+        img = np.array(image.convert("RGB")).astype(np.float32) / 255.0 
+    img = img[np.newaxis, ...] 
 
     img = crop_center(img)
 
