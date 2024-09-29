@@ -29,7 +29,8 @@ pip install -r requirements.txt
 ```
 streamlit run main.py
 ```
-
+## Run Website
+You can also access the deployed version of the application [here](https://background-stylizer.streamlit.app/).
 # Possible Improvements
 - model may fail for multiple people hence build a mask and segment out all YOLO detection where label is person
 - using different style transfer techniques(which would increase runtime) for better results
